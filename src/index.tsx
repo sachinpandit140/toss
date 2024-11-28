@@ -4,6 +4,7 @@ import App from './App';
 import "./App.css";
 
 const root = document.createElement("div")
+document.title = "Toss"
 root.className = "container"
 document.body.appendChild(root)
 const rootDiv = ReactDOM.createRoot(root);
