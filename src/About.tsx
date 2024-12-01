@@ -1,10 +1,11 @@
   import React from "react";
 
   type Props = {
-    backToHome: () => void;
+    backToHome: () => void; 
   };
 
-  const About = ({backToHome}: Props) => {
+
+  const About = ({backToHome} : Props) => {
     return( 
     <div className="about-container">
         <h1 className="h1about">About Us</h1>

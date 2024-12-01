@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
+:root {
+  --primary-bg: #EEBC86;
+  --nav-bg: #FFEBEB;
+  --border-active: #1ecbe1;
+  --text-color: #000;
+  --container-width: 22rem;
+  --container-height: 25rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: var(--container-width);
+  height: var(--container-height);
+  margin: 0;
+  font-family: "Jersey 10", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-color);
+  background-color: var(--primary-bg);
+}
+
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+input[type="url"] {
+  width: 80%;
+  padding: 8px 12px;
+  border: 2px solid var(--border-active);
+  border-radius: 4px;
+  background-color: var(--nav-bg);
+  font-family: inherit;
+  margin: 10px 0;
+}
+
+.divider {
+  font-size: 24px;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+  padding: 8px;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+p {
+  color: var(--text-color);
+  font-family: "Jersey 10";
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+#hyperlink-name{
+  color:#000;
+  text-decoration: underline;
+}
