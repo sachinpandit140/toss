@@ -1,6 +1,6 @@
-import React from 'react';
-import { Coffee, Clock} from 'lucide-react';
-import '../styles/Navigation.css';
+import React from "react";
+import { Coffee, Clock } from "lucide-react";
+import "../styles/Navigation.css";
 
 interface NavigationProps {
   onHomeClick: () => void;
@@ -17,14 +17,14 @@ export const Navigation: React.FC<NavigationProps> = ({
     <nav className="nav">
       <div className="nav-container">
         <button className="nav-brand" onClick={onHomeClick}>
-          <img src="images/Group 1.png" id="nav-logo" />
+          <img src="../images/Group 1.png" id="nav-logo" />
         </button>
-        
+
         <div className="nav-links">
           <button className="nav-link" onClick={onAboutClick}>
             About Us
           </button>
-          
+
           <a
             href="https://buymeacoffee.com/sachinpandit"
             target="_blank"
@@ -33,7 +33,7 @@ export const Navigation: React.FC<NavigationProps> = ({
           >
             <Coffee />
           </a>
-          
+
           <button className="nav-link" onClick={onHistoryClick}>
             <Clock />
           </button>
