@@ -5,7 +5,7 @@ interface ButtonImageProps {
   image: string; 
   altText?: string; 
   name?: string;
-  onClick?: () => void; 
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ButtonImage: React.FC<ButtonImageProps> = ({ image, altText = "Button image",name="button", onClick }) => {

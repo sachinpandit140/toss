@@ -3,12 +3,22 @@
 .App {
   color: white;
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 p{
   color: #000;
   font-family: "Jersey 10";
   font-size: 16.2px;
+  font-style: normal;
+  font-weight: 200;
+  overflow-wrap: break-word; 
+}
+
+h1{
+  color: #000;
+  font-family: "Jersey 10";
+  font-size: 20px;
   font-style: normal;
   font-weight: 200;
 }
@@ -19,6 +29,14 @@ p{
   align-items: center;
 
 }
+
+.about-container{
+  width: 98%;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 
 .navbar{
   width: 100%;
@@ -79,34 +97,34 @@ p{
   padding-top : 5px;
   flex-shrink: 0;
   height: 80%;
+  padding-left: 5px;
 }
 
 #coffee{
   width: 20 px;
   height:20px;
-  padding-top: 10px;
+  padding-top: 12px;
 }
 
 #history{
   width: 20px;
   height:20px;
   padding-left: 10px;
-  padding-top: 12px;
+  padding-top: 6px;
   padding-right:8px;
 }
 
 #about{
   color: #000;
+  background-color: #FFEBEB;
+  cursor: pointer;
   font-family: "Jersey 10";
   font-size: 16.2px;
   font-style: normal;
   line-height: normal;
-  padding-top: 17px;
+  margin-top: 10px;
   text-decoration: none;
-}
-
-#about:hover{
-  text-decoration: underline;
+  border:none;
 }
 
 #pmain{
@@ -126,7 +144,7 @@ p{
 
 #url_box {
   width: 60%;
-  height: 20px;
+  height: 30px;
   background: #FFEBEB;
   border: #1ecbe1 solid 2px;
   transition: width 1s ease, border 1s ease;
@@ -136,7 +154,7 @@ p{
 }
 
 #url_box:focus {
-  width: 90%; 
+  width: 100%; 
   border: #000 solid 1px; 
 }
 
@@ -165,4 +183,36 @@ p{
   align-items: center;
   border-radius: 10%; 
   background: #FFEBEB;
+}
+
+#back-button {
+  background-color: #FFEBEB ;
+  cursor: pointer;
+  font-family: "Jersey 10";
+  font-size: 16.2px;
+  font-style: normal;
+  line-height: normal;
+  border:#000 solid 1px;
+
+}
+
+#back-button:hover {
+  background-color: #FFEBEB ;
+  opacity: 0.8;
+  cursor: pointer;
+  font-family: "Jersey 10";
+  font-size: 16.2px;
+  font-style: normal;
+  line-height: normal;
+  border:#000 solid 1px;
+}
+
+#hyperlink-name{
+  color: #000;
+  font-family: "Jersey 10";
+  font-size: 16.2px;
+  font-style: normal;
+  line-height: normal;
+  text-decoration:underline;
+  border:none;
 }

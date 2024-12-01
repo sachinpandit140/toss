@@ -1,9 +1,13 @@
 import React from "react";
 
-type Props = {};
+type Props = {
+    url?: string;
+    backToHome: () => void;
+};
 
-const Result = (props: Props) => {
-  return <div>Result</div>;
+const Result = ({url, backToHome}: Props) => {
+  return <div>Url
+  </div>;
 };
 
 export default Result;
