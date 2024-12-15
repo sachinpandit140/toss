@@ -12,13 +12,14 @@ const Result = ({ url, backToHome }: Props) => {
   const [loading, setLoading] = React.useState<boolean>(true); // Use useState for loading
 
   React.useEffect(() => {
+    console.log(url);
     const fetchData = async () => {
       if (!url) return;
 
       setLoading(true); // Set loading to true when URL changes
 
       try {
-        const tld = new URL(url).hostname;
+        const tld = new URL(url);
 
         const response = await fetch(`/api/scan?query=${tld}`, {
           method: "GET",
@@ -51,7 +52,6 @@ const Result = ({ url, backToHome }: Props) => {
       </div>
     );
   }
-
   return (
     <div className="result-container">
       <h3>Scan Results</h3>

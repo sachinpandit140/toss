@@ -2,6 +2,8 @@
   width: 100%;
   background-color: var(--nav-bg);
   padding: 12px;
+  height: 90px;
+  border-radius: 10px;
 }
 
 .nav-container {
@@ -11,11 +13,10 @@
   align-items: center;
 }
 
-#nav-logo{
+#nav-logo {
   height: 100%;
   width: 80%;
 }
-
 
 .nav-links {
   display: flex;
@@ -43,4 +44,3 @@
   width: 24px;
   height: 24px;
 }
-

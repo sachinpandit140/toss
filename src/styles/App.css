@@ -120,3 +120,94 @@ p {
   align-items: center;
   height: 100%;
 }
+
+/* LegalLinkSelector.css */
+.no-links {
+  font-size: 0.875rem;
+  color: #6b7280; /* text-gray-500 */
+  font-style: italic;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link-selector {
+  margin-bottom: 1rem;
+}
+
+.link-summary {
+  font-size: 0.875rem;
+  color: #4b5563; /* text-gray-600 */
+  margin-bottom: 0.5rem;
+}
+
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb; /* border-gray-200 */
+  border-radius: 0.375rem;
+  background-color: #ffffff; /* white */
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.link-item:hover {
+  background-color: #f9fafb; /* hover:bg-gray-50 */
+}
+
+.link-item.selected {
+  background-color: #ebf5ff; /* bg-blue-50 */
+  border-color: #bfdbfe; /* border-blue-200 */
+}
+
+.top-level {
+  background-color: #e5e7eb;
+  border-color: #bfdbfe;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.link-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #9ca3af; /* text-gray-400 */
+  flex-shrink: 0;
+}
+
+.link-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.link-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-url {
+  font-size: 0.75rem;
+  color: #6b7280; /* text-gray-500 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-confidence {
+  font-size: 0.75rem;
+  color: #9ca3af; /* text-gray-400 */
+}

@@ -3,18 +3,34 @@ import { Navigation } from "./components/Navigation";
 import { UrlInput } from "./components/UrlInput";
 import { Scanner } from "./components/Scanner";
 import { Page } from "./types";
-import { getCurrentTabUrl } from "./utils/chrome";
 import "./styles/App.css";
 import About from "./About";
 import Result from "./Result";
 import History from "./History";
+import ScannedPage from "./LegalLinkSelector";
+import { scrapeLegalLinks } from "./utils/linkscraper";
+import type { ScrapedLink } from "./types";
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>("home");
   const [url, setUrl] = useState<string>("");
+  const [urls, setUrls] = useState<ScrapedLink[]>([]);
+
+  useEffect(() => {
+    const fetchLinks = async () => {
+      const links = await scrapeLegalLinks();
+      setUrls(links);
+    };
+    fetchLinks();
+  }, []);
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
+  };
+
+  const handleResult = (url: string) => {
+    setUrl(url);
+    setCurrentPage("result");
   };
 
   const handleUrlSubmit = (e: React.FormEvent) => {
@@ -26,14 +42,8 @@ function App() {
     }
   };
 
-  const handleScanPage = async () => {
-    const link = await getCurrentTabUrl();
-    if (link) {
-      setUrl(link);
-      setCurrentPage("result");
-    } else {
-      alert("Error scanning page. Please enter the URL manually.");
-    }
+  const handleScan = async () => {
+    setCurrentPage("select");
   };
 
   useEffect(() => {
@@ -58,7 +68,7 @@ function App() {
               onUrlChange={handleUrlChange}
               onSubmit={handleUrlSubmit}
             />
-            <Scanner onScan={handleScanPage} />
+            <Scanner onScan={handleScan} />
           </>
         )}
 
@@ -70,6 +80,14 @@ function App() {
         )}
         {currentPage === "history" && (
           <History backToHome={() => setCurrentPage("home")} />
+        )}
+        {currentPage === "select" && (
+          <ScannedPage
+            backToHome={() => setCurrentPage("home")}
+            links={urls}
+            selectedUrl={url}
+            handleResult={handleResult}
+          />
         )}
       </main>
     </>
