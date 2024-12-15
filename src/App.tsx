@@ -3,7 +3,7 @@ import { Navigation } from "./components/Navigation";
 import { UrlInput } from "./components/UrlInput";
 import { Scanner } from "./components/Scanner";
 import { Page } from "./types";
-import { findLegalLinks } from "./utils/linkScanner";
+import { getCurrentTabUrl } from "./utils/chrome";
 import "./styles/App.css";
 import About from "./About";
 import Result from "./Result";
@@ -21,30 +21,21 @@ function App() {
     e.preventDefault();
     if (url) {
       setCurrentPage("result");
+    } else {
+      alert("Please enter a URL");
     }
   };
 
   const handleScanPage = async () => {
-    const links = findLegalLinks(document);
-
-    if (typeof chrome !== "undefined" && chrome?.storage?.local) {
-      chrome.storage.local.set({ foundLinks: links }, () => {
-        if (links.length > 0) {
-          setUrl(links[0]);
-          setCurrentPage("result");
-        } else {
-          alert("No privacy or ToS links found on this page.");
-        }
-      });
+    const link = await getCurrentTabUrl();
+    if (link) {
+      setUrl(link);
+      setCurrentPage("result");
     } else {
-      if (links.length > 0) {
-        setUrl(links[0]);
-        setCurrentPage("result");
-      } else {
-        alert("No privacy or ToS links found on this page.");
-      }
+      alert("Error scanning page. Please enter the URL manually.");
     }
   };
+
   useEffect(() => {
     if (currentPage === "home") {
       setUrl("");
