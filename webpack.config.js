@@ -5,6 +5,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 module.exports = {
   entry: {
     index: "./src/index.tsx",
+    background: "./public/scripts/background.js",
   },
   mode: "production",
   module: {
@@ -33,6 +34,7 @@ module.exports = {
       patterns: [
         { from: "manifest.json", to: "../manifest.json" },
         { from: "public/images", to: "../images" },
+        { from: "public/scripts", to: "./" },
       ],
     }),
     ...getHtmlPlugins(["index"]),
@@ -50,7 +52,7 @@ function getHtmlPlugins(chunks) {
   return chunks.map(
     (chunk) =>
       new HTMLPlugin({
-        title: "React extension",
+        title: "ToSS",
         filename: `${chunk}.html`,
         chunks: [chunk],
       })
