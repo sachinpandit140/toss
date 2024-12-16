@@ -3,7 +3,6 @@
  */
 import type { ScrapedLink } from "../types";
 
-// Common terms used in ToS link text
 const TOS_KEYWORDS = [
   "terms",
   "terms of service",
@@ -19,6 +18,13 @@ const TOS_KEYWORDS = [
   "cookie policy",
   "terms-of-service",
   "terms-of-use",
+  "privacy",
+  "policy",
+  "guidelines",
+  "terms of use",
+  "privacy notice",
+  "service agreement",
+  "privacy-statement",
 ];
 
 // Calculate confidence score for a link
@@ -26,20 +32,34 @@ function calculateConfidence(link: HTMLAnchorElement): number {
   const text = link.textContent?.toLowerCase() || "";
   const href = link.href.toLowerCase();
 
+  const LEGAL_PATTERNS = [
+    /\/terms\b/i,
+    /\/tos\b/i,
+    /\/legal\b/i,
+    /\/policy\b/i,
+    /\/privacy\b/i,
+    /\/agreement\b/i,
+    /\/disclaimer\b/i,
+    /\bterms\b.*\.(com|net|org|io|gov)/i,
+    /\/docs\/terms\b/i,
+    /\/help\/legal\b/i,
+  ];
+
   // Check if link text matches any ToS keywords
   const hasKeyword = TOS_KEYWORDS.some(
     (keyword) => text.includes(keyword) || href.includes(keyword)
   );
 
-  if (!hasKeyword) return 0;
+  const matchesPattern = LEGAL_PATTERNS.some((pattern) => pattern.test(href));
+
+  if (!hasKeyword && !matchesPattern) return 0;
 
   let score = 0;
 
-  // Increase score based on various factors
-  if (link.closest("footer")) score += 0.3;
-  if (href.includes("terms") || href.includes("tos")) score += 0.3;
-  if (text.includes("terms of service")) score += 0.4;
-  if (href.includes("/legal/") || href.includes("/terms/")) score += 0.2;
+  if (hasKeyword) score += 0.4;
+  if (matchesPattern) score += 0.5;
+
+  if (/\/(help|docs|support)\//.test(href) && matchesPattern) score += 0.1;
 
   return Math.min(score, 1); // Cap at 1
 }

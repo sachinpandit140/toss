@@ -7,6 +7,8 @@
   --text-color: #000;
   --container-width: 22rem;
   --container-height: 27rem;
+  --font-diff: Lucida Sans, Lucida Sans Regular, Lucida Grande,
+    Lucida Sans Unicode, Geneva, Verdana, sans-serif;
 }
 
 * {
@@ -153,6 +155,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  font: var(--font-diff);
 }
 
 .link-item {
