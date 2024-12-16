@@ -21,21 +21,6 @@ const TOS_KEYWORDS = [
   "terms-of-use",
 ];
 
-// Get all links from the footer area
-function getFooterLinks() {
-  const footerElements = document.querySelectorAll(
-    'footer, [class*="footer"], [id*="footer"]'
-  );
-  const links: HTMLAnchorElement[] = [];
-
-  footerElements.forEach((footer) => {
-    const footerLinks = footer.getElementsByTagName("a");
-    links.push(...Array.from(footerLinks));
-  });
-
-  return links;
-}
-
 // Calculate confidence score for a link
 function calculateConfidence(link: HTMLAnchorElement): number {
   const text = link.textContent?.toLowerCase() || "";
@@ -73,6 +58,7 @@ export async function scrapeLegalLinks(): Promise<ScrapedLink[]> {
       active: true,
       currentWindow: true,
     });
+    console.log(tab.id);
     if (!tab.id) throw new Error("No active tab found");
 
     // Execute scraping in the context of the active tab
@@ -81,27 +67,27 @@ export async function scrapeLegalLinks(): Promise<ScrapedLink[]> {
       func: () => {
         // This function runs in the context of the web page
         const footerLinks = Array.from(
-          document.querySelectorAll(
-            'footer a, [class*="footer"] a, [id*="footer"] a'
-          )
+          document.querySelectorAll('a[href*="/terms"]')
         ) as HTMLAnchorElement[];
+
+        console.log(footerLinks);
 
         return footerLinks.map((link) => ({
           url: link.href,
           text: link.textContent || "",
-          html: link.outerHTML,
         }));
       },
     });
-
     // Process and filter results
     const links = results[0]?.result;
     if (!links) throw new Error("No links found");
 
     return links
       .map((link) => {
+        console.log(link.url);
         const tempLink = document.createElement("a");
-        tempLink.outerHTML = link.html;
+        tempLink.href = link.url;
+        tempLink.textContent = link.text;
 
         return {
           url: link.url,
