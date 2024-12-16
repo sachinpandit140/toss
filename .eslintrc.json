@@ -1,0 +1,13 @@
+{
+    "env": {
+      "browser": true
+    },
+    "globals": {
+      "chrome": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 2021,
+      "sourceType": "module"
+    }
+  }
+  

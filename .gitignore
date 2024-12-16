@@ -22,3 +22,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# editors
+.idea
+.vscode
+
+# venv
+.venv/
+venv/
+.env
+__pycache__/
