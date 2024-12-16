@@ -62,6 +62,9 @@ h3 {
   padding: 20px;
   background-color: #ffebeb;
   border-radius: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: medium;
 }
 .alert-container {
   display: flex;
@@ -71,6 +74,9 @@ h3 {
   background-color: #ffebeb;
   border-radius: 10px;
   color: #b1212b;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: medium;
 }
 
 input[type="url"] {
@@ -105,7 +111,7 @@ button:hover {
 p {
   color: var(--text-color);
   font-family: "Jersey 10";
-  font-size: 16px;
+  font-size: 18px;
   margin: 8px 0;
 }
 

@@ -64,14 +64,8 @@ export async function scrapeLegalLinks(): Promise<ScrapedLink[]> {
   try {
     // Development mode check
     if (typeof chrome === "undefined" || !chrome.tabs) {
-      console.log("Development mode - returning mock data");
-      return [
-        {
-          url: "https://example.com/terms",
-          text: "Terms of Service",
-          confidence: 1,
-        },
-      ];
+      alert("No active tabs found");
+      return [];
     }
 
     // Get active tab
