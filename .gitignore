@@ -26,3 +26,9 @@ yarn-error.log*
 # editors
 .idea
 .vscode
+
+# venv
+.venv/
+venv/
+.env
+__pycache__/
