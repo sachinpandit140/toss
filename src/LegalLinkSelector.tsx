@@ -73,7 +73,6 @@ const LegalLinkSelector: React.FC<LegalLinkSelectorProps> = ({
           >
             <Link className="link-icon" />
             <div className="link-content">
-              <div className="link-text">{link.text}</div>
               <div className="link-url">{link.url}</div>
             </div>
             <div className="link-confidence">

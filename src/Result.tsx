@@ -21,13 +21,15 @@ const Result = ({ url, backToHome }: Props) => {
       try {
         const tld = new URL(url);
 
-        const response = await fetch(`/api/scan?query=${tld}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
+        const response = await fetch(
+          `http://localhost:8000/api/scan?query=${tld}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         if (response.ok) {
           const data = await response.json();
           setSummary(data.summary || []);

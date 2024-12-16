@@ -4,62 +4,47 @@
 import type { ScrapedLink } from "../types";
 
 const TOS_KEYWORDS = [
-  "terms",
   "terms of service",
-  "terms & conditions",
-  "terms and conditions",
-  "legal",
-  "privacy policy",
-  "user agreement",
-  "tos",
-  "eula",
-  "end user license agreement",
-  "data policy",
-  "cookie policy",
   "terms-of-service",
   "terms-of-use",
-  "privacy",
-  "policy",
-  "guidelines",
   "terms of use",
-  "privacy notice",
-  "service agreement",
-  "privacy-statement",
 ];
 
 // Calculate confidence score for a link
-function calculateConfidence(link: HTMLAnchorElement): number {
-  const text = link.textContent?.toLowerCase() || "";
-  const href = link.href.toLowerCase();
+function calculateConfidence(link: string): number {
+  const href = link.toLowerCase();
 
-  const LEGAL_PATTERNS = [
-    /\/terms\b/i,
-    /\/tos\b/i,
-    /\/legal\b/i,
-    /\/policy\b/i,
-    /\/privacy\b/i,
-    /\/agreement\b/i,
-    /\/disclaimer\b/i,
-    /\bterms\b.*\.(com|net|org|io|gov)/i,
-    /\/docs\/terms\b/i,
-    /\/help\/legal\b/i,
+  const LEGAL_TERMS = [
+    "tos",
+    "terms",
+    "tos",
+    "legal",
+    "policy",
+    "privacy",
+    "agreement",
+    "disclaimer",
+    "service",
   ];
 
+  const LEGAL_PATTERNS = LEGAL_TERMS.map((term) => new RegExp(`${term}`, "i")); // Create RegExp for each term with optional slashes
+
+  const BETTER_PATTERNS = LEGAL_TERMS.map(
+    (term) => new RegExp(`\/${term}`, "i")
+  )
+    .concat(LEGAL_TERMS.map((term) => new RegExp(`${term}\/`, "i")))
+    .concat(LEGAL_TERMS.map((term) => new RegExp(`\/${term}\/`, "i")));
+
   // Check if link text matches any ToS keywords
-  const hasKeyword = TOS_KEYWORDS.some(
-    (keyword) => text.includes(keyword) || href.includes(keyword)
-  );
+  const hasKeyword = TOS_KEYWORDS.some((keyword) => href.includes(keyword));
+  if (hasKeyword) return 1;
 
   const matchesPattern = LEGAL_PATTERNS.some((pattern) => pattern.test(href));
+  const matchesBetter = BETTER_PATTERNS.some((pattern) => pattern.test(href));
 
-  if (!hasKeyword && !matchesPattern) return 0;
+  let score = 0.45;
 
-  let score = 0;
-
-  if (hasKeyword) score += 0.4;
-  if (matchesPattern) score += 0.5;
-
-  if (/\/(help|docs|support)\//.test(href) && matchesPattern) score += 0.1;
+  if (matchesBetter) score += 0.45;
+  else if (matchesPattern) score += 0.15;
 
   return Math.min(score, 1); // Cap at 1
 }
@@ -78,7 +63,6 @@ export async function scrapeLegalLinks(): Promise<ScrapedLink[]> {
       active: true,
       currentWindow: true,
     });
-    console.log(tab.id);
     if (!tab.id) throw new Error("No active tab found");
 
     // Execute scraping in the context of the active tab
@@ -86,37 +70,36 @@ export async function scrapeLegalLinks(): Promise<ScrapedLink[]> {
       target: { tabId: tab.id },
       func: () => {
         // This function runs in the context of the web page
-        const footerLinks = Array.from(
-          document.querySelectorAll('a[href*="/terms"]')
+        let footerLinks = Array.from(
+          document.querySelectorAll('a[href*="terms"], a[href*="tos"]')
         ) as HTMLAnchorElement[];
 
-        console.log(footerLinks);
+        // Use a Set to eliminate duplicates based on href
+        const uniqueLinks = Array.from(
+          new Set(footerLinks.map((link) => link.href))
+        ).map((href) => {
+          const tempLink = document.createElement("a");
+          tempLink.href = href;
+          return tempLink;
+        });
 
-        return footerLinks.map((link) => ({
-          url: link.href,
-          text: link.textContent || "",
-        }));
+        // Return unique links (only href needed)
+        return uniqueLinks.map((link) => link.href);
       },
     });
+
     // Process and filter results
-    const links = results[0]?.result;
-    if (!links) throw new Error("No links found");
 
-    return links
-      .map((link) => {
-        console.log(link.url);
-        const tempLink = document.createElement("a");
-        tempLink.href = link.url;
-        tempLink.textContent = link.text;
-
-        return {
-          url: link.url,
-          text: link.text,
-          confidence: calculateConfidence(tempLink),
-        };
-      })
-      .filter((link) => link.confidence > 0)
-      .sort((a, b) => b.confidence - a.confidence);
+    const links: string[] = results[0]?.result ?? [];
+    if (links.length === 0) throw new Error("No links found");
+    const scrapedLegalLinks: ScrapedLink[] = links
+      .map((url) => ({
+        url: url,
+        confidence: calculateConfidence(url),
+      }))
+      .filter((link) => link.confidence > 0) // Only keep links with positive confidence
+      .sort((a, b) => b.confidence - a.confidence); // Sort by confidence
+    return scrapedLegalLinks;
   } catch (error) {
     console.error("Error scraping legal links:", error);
     return [];

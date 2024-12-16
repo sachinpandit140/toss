@@ -14,6 +14,5 @@ export interface ResultProps extends NavigationProps {
 
 export interface ScrapedLink {
   url: string;
-  text: string;
   confidence: number;
 }
