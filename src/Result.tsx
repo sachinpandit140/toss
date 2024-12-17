@@ -32,8 +32,11 @@ const Result = ({ url, backToHome }: Props) => {
         );
         if (response.ok) {
           const data = await response.json();
+          data.summary = data.summary.filter((item: string) => /\S/.test(item));
+          data.alerts = data.alerts.filter((item: string) => /\S/.test(item));
           setSummary(data.summary || []);
           setAlerts(data.alerts || []);
+          console.log(data);
         } else {
           console.error("Failed to fetch data:", response.statusText);
         }
@@ -57,6 +60,7 @@ const Result = ({ url, backToHome }: Props) => {
   return (
     <div className="result-container">
       <h3>Scan Results</h3>
+      <p id="url-result">{url}</p>
       <p>Summary</p>
       <div className="summary-container">
         <ul>

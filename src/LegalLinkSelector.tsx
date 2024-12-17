@@ -25,7 +25,8 @@ const LegalLinkSelector: React.FC<LegalLinkSelectorProps> = ({
   const handletoplevel = () => {
     getCurrentTabUrl().then((url) => {
       let tld = new URL(url).hostname;
-      handleResult(tld);
+      let protocol = new URL(url).protocol;
+      handleResult(`${protocol}//${tld}`);
     });
   };
 
