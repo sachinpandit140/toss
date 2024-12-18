@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Navigation } from "./components/Navigation";
-import { UrlInput } from "./components/UrlInput";
-import { Scanner } from "./components/Scanner";
+import { Navigation } from "./Components/Navigation";
+import { UrlInput } from "./Components/UrlInput";
+import { Scanner } from "./Components/Scanner";
 import { Page } from "./types";
 import "./styles/App.css";
 import About from "./About";

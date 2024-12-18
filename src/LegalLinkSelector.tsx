@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "lucide-react";
-import { LoadingSpinner } from "./components/LoadingSpinner";
+import { LoadingSpinner } from "./Components/LoadingSpinner";
 import type { ScrapedLink } from "./types";
 import { getCurrentTabUrl } from "./utils/chrome";
 

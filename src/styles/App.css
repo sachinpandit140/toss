@@ -189,6 +189,7 @@ p {
   background-color: #ffffff;
   transition: background-color 0.2s;
   cursor: pointer;
+  margin: 0;
 }
 
 .link-item:hover {

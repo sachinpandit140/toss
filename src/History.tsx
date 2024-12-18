@@ -1,5 +1,5 @@
 import React from "react";
-import { LoadingSpinner } from "./components/LoadingSpinner";
+import { LoadingSpinner } from "./Components/LoadingSpinner";
 import { Link } from "lucide-react";
 import { ResultData } from "./Result";
 import { Trash } from "lucide-react";
