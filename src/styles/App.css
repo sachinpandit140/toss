@@ -13,6 +13,7 @@
   scrollbar-color: var(--primary-bg) var(--nav-bg);
   scroll-behavior: smooth;
   scroll-snap-type: mandatory;
+  --font-main: "Jersey 10", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
@@ -25,7 +26,7 @@ body {
   width: var(--container-width);
   height: var(--container-height);
   margin: 0;
-  font-family: "Jersey 10", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-main);
   color: var(--text-color);
   background-color: var(--primary-bg);
 }
@@ -33,7 +34,7 @@ body {
 h3 {
   font-weight: 100;
   font-size: x-large;
-  margin-bottom: 15 px;
+  margin-bottom: 15px;
 }
 
 .app-container {
@@ -122,6 +123,8 @@ button {
   font: inherit;
   padding: 8px;
   transition: transform 0.2s;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 button:hover {
@@ -130,7 +133,7 @@ button:hover {
 
 p {
   color: var(--text-color);
-  font-family: "Jersey 10";
+  font-family: var(--font-main);
   font-size: 18px;
   margin: 8px 0;
 }
@@ -165,6 +168,8 @@ p {
 .link-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
   height: auto;
   gap: 0.5rem;
   font: var(--font-diff);
@@ -174,7 +179,7 @@ p {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: 100%;
+  width: 80%;
   text-align: left;
   padding: 0.5rem;
   word-wrap: break-word;
@@ -227,7 +232,7 @@ p {
   color: #6b7280;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 
 .link-confidence {
@@ -237,7 +242,7 @@ p {
 
 .back-to-home {
   text-decoration: underline;
-  size: 0.7rem;
+  size: 1.6rem;
   font-size: small;
   background-color: #ffebeb;
   font-family: var(--font-diff);
@@ -273,8 +278,17 @@ p {
 }
 
 .link-unit {
+  width: 100%;
   height: 3rem;
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.back-to-home-legacy {
+  font-family: var(--font-main);
+  text-decoration: underline;
+  size: 1.6rem;
+  font-size: small;
+  background-color: #ffebeb;
 }

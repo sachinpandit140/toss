@@ -39,7 +39,7 @@ const About = ({ backToHome }: Props) => {
       </p>
 
       <p>©2024 - Present. All rights reserved </p>
-      <button id="back-to-home" onClick={backToHome}>
+      <button className="back-to-home-legacy" onClick={backToHome}>
         Back To Home
       </button>
     </div>

@@ -47,7 +47,7 @@ const History = ({ backToHome, handleHistoryToResult }: Props) => {
       <div className="history-container">
         <h1 className="h1history">History</h1>
         <h1>No history found</h1>
-        <button id="back-to-home" onClick={backToHome}>
+        <button className="back-to-home" onClick={backToHome}>
           Back To Home
         </button>
       </div>
@@ -76,7 +76,7 @@ const History = ({ backToHome, handleHistoryToResult }: Props) => {
             </div>
           ))}
         </div>
-        <button id="back-to-home" onClick={backToHome}>
+        <button className="back-to-home" onClick={backToHome}>
           Back To Home
         </button>
       </div>
