@@ -44,58 +44,55 @@ const Result = ({
     });
   };
   React.useEffect(() => {
+    if (fromHistory) {
+      setSummary(fromHistoryData.summary || []);
+      setAlerts(fromHistoryData.alerts || []);
+      url = fromHistoryData.url;
+      const result: ResultData = {
+        url: url,
+        summary: fromHistoryData.summary,
+        alerts: fromHistoryData.alerts,
+      };
+      addToHistory(result);
+      setFromHistory(false);
+      fromHistory = false;
+      setTimeout(() => setLoading(false), 500);
+      return;
+    }
     const fetchData = async () => {
-      if (!url) return;
-
       setLoading(true); // Set loading to true when URL changes
+      if (!url) return;
+      try {
+        const tld = new URL(url);
 
-      if (fromHistory) {
-        setSummary(fromHistoryData.summary || []);
-        setAlerts(fromHistoryData.alerts || []);
-        const result: ResultData = {
-          url: url,
-          summary: fromHistoryData.summary,
-          alerts: fromHistoryData.alerts,
-        };
-        addToHistory(result);
-        setFromHistory(false);
-        fromHistory = false;
-        setTimeout(() => setLoading(false), 500);
-      } else {
-        try {
-          const tld = new URL(url);
-
-          const response = await fetch(
-            `http://localhost:8000/api/scan?query=${tld}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          if (response.ok && !fromHistory) {
-            const data = await response.json();
-            data.summary = data.summary.filter((item: string) =>
-              /\S/.test(item)
-            );
-            data.alerts = data.alerts.filter((item: string) => /\S/.test(item));
-            setSummary(data.summary || []);
-            setAlerts(data.alerts || []);
-            const result: ResultData = {
-              url: url,
-              summary: data.summary,
-              alerts: data.alerts,
-            };
-            addToHistory(result);
-          } else {
-            console.error("Failed to fetch data:", response.statusText);
+        const response = await fetch(
+          `http://localhost:8000/api/scan?query=${tld}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-        } catch (error) {
-          console.error("Error while fetching data:", error);
-        } finally {
-          setTimeout(() => setLoading(false), 500);
+        );
+        if (response.ok && !fromHistory) {
+          const data = await response.json();
+          data.summary = data.summary.filter((item: string) => /\S/.test(item));
+          data.alerts = data.alerts.filter((item: string) => /\S/.test(item));
+          setSummary(data.summary || []);
+          setAlerts(data.alerts || []);
+          const result: ResultData = {
+            url: url,
+            summary: data.summary,
+            alerts: data.alerts,
+          };
+          addToHistory(result);
+        } else {
+          console.error("Failed to fetch data:", response.statusText);
         }
+      } catch (error) {
+        console.error("Error while fetching data:", error);
+      } finally {
+        setTimeout(() => setLoading(false), 500);
       }
     };
 
