@@ -9,6 +9,10 @@
   --container-width: 22rem;
   --container-height: 27rem;
   --font-diff: "Arsenal SC", serif;
+  scrollbar-width: 5px;
+  scrollbar-color: var(--primary-bg) var(--nav-bg);
+  scroll-behavior: smooth;
+  scroll-snap-type: mandatory;
 }
 
 * {
@@ -24,10 +28,6 @@ body {
   font-family: "Jersey 10", -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text-color);
   background-color: var(--primary-bg);
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-bg) var(--nav-bg);
-  scroll-behavior: smooth;
-  scroll-snap-type: mandatory;
 }
 
 h3 {
@@ -56,7 +56,7 @@ h3 {
   background-color: #eebc86;
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
   font-size: small;
 }
 
@@ -80,6 +80,21 @@ h3 {
   text-align: left;
   border-radius: 10px;
   color: #b1212b;
+  font-family: var(--font-diff);
+  font-size: small;
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.history-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  border-radius: 10px;
   font-family: var(--font-diff);
   font-size: small;
 }
@@ -123,13 +138,6 @@ p {
 #hyperlink-name {
   color: #000;
   text-decoration: underline;
-}
-
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 }
 
 /* LegalLinkSelector.css */
@@ -229,10 +237,44 @@ p {
 
 .back-to-home {
   text-decoration: underline;
+  size: 0.7rem;
+  font-size: small;
+  background-color: #ffebeb;
+  font-family: var(--font-diff);
 }
 
 #url-result {
   font-size: small;
   font-family: var(--font-diff);
   color: #6b7280;
+}
+
+#clear-history {
+  position: relative;
+  bottom: 2;
+  right: 5;
+  font-size: medium;
+  font-family: var(--font-diff);
+  color: #6b7280;
+  cursor: pointer;
+  background-color: #ffffff;
+  margin-bottom: 10px;
+}
+
+#delete-button {
+  font-size: medium;
+  font-family: var(--font-diff);
+  color: #6b7280;
+  cursor: pointer;
+}
+
+#delete-button:hover {
+  color: #b1212b;
+}
+
+.link-unit {
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
