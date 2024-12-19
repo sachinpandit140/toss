@@ -54,12 +54,12 @@ const History = ({ backToHome, handleHistoryToResult }: Props) => {
     );
   }
   return (
-    <div>
+    <div className="history-container">
       <div className="history-container">
         <h3 className="h1history">History</h3>
         <div className="link-list">
           {res.reverse().map((link, index) => (
-            <div className="link-unit">
+            <div className="history-unit">
               <button
                 key={index}
                 onClick={() => handleHistoryToResult(link)}
@@ -69,6 +69,7 @@ const History = ({ backToHome, handleHistoryToResult }: Props) => {
                 <div className="link-content">
                   <div className="link-url">{link.url}</div>
                 </div>
+                <div className="time-confidence">{link.time}</div>
               </button>
               <button id="delete-button" onClick={() => handleClearItem(link)}>
                 <Trash />

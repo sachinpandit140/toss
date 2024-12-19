@@ -21,6 +21,7 @@ function App() {
     url: "",
     summary: [],
     alerts: [],
+    time: "",
   });
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {

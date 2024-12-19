@@ -13,6 +13,7 @@ export interface ResultData {
   url: string;
   summary: string[];
   alerts: string[];
+  time: string;
 }
 
 const Result = ({
@@ -52,6 +53,7 @@ const Result = ({
         url: url,
         summary: fromHistoryData.summary,
         alerts: fromHistoryData.alerts,
+        time: new Date().toLocaleString(),
       };
       addToHistory(result);
       setFromHistory(false);
@@ -84,6 +86,7 @@ const Result = ({
             url: url,
             summary: data.summary,
             alerts: data.alerts,
+            time: new Date().toLocaleString(),
           };
           addToHistory(result);
         } else {
