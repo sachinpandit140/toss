@@ -13,6 +13,15 @@ export const Navigation: React.FC<NavigationProps> = ({
   onAboutClick,
   onHistoryClick,
 }) => {
+  const coffeeurl = [
+    "https://buymeacoffee.com/sachinpandit",
+    "https://buymeacoffee.com/bibhav48",
+  ];
+
+  const getRandomCoffeeUrl = () => {
+    return coffeeurl[Math.floor(Math.random() * 2)];
+  };
+
   return (
     <nav className="nav">
       <div className="nav-container">
@@ -26,7 +35,7 @@ export const Navigation: React.FC<NavigationProps> = ({
           </button>
 
           <a
-            href="https://buymeacoffee.com/sachinpandit"
+            href={getRandomCoffeeUrl()}
             target="_blank"
             rel="noopener noreferrer"
             className="nav-link"

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Jersey+10&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 :root {
   --primary-bg: #eebc86;
@@ -7,8 +8,12 @@
   --text-color: #000;
   --container-width: 22rem;
   --container-height: 27rem;
-  --font-diff: Lucida Sans, Lucida Sans Regular, Lucida Grande,
-    Lucida Sans Unicode, Geneva, Verdana, sans-serif;
+  --font-diff: "Arsenal SC", serif;
+  scrollbar-width: 5px;
+  scrollbar-color: var(--primary-bg) var(--nav-bg);
+  scroll-behavior: smooth;
+  scroll-snap-type: mandatory;
+  --font-main: "Jersey 10", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
@@ -21,16 +26,15 @@ body {
   width: var(--container-width);
   height: var(--container-height);
   margin: 0;
-  font-family: "Jersey 10", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-main);
   color: var(--text-color);
   background-color: var(--primary-bg);
-  border: 0.1px solid #ffebeb;
 }
 
 h3 {
   font-weight: 100;
   font-size: x-large;
-  margin-bottom: 15 px;
+  margin-bottom: 15px;
 }
 
 .app-container {
@@ -63,10 +67,10 @@ h3 {
   align-items: center;
   padding: 20px;
   background-color: #ffebeb;
+  text-align: left;
   border-radius: 10px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  font-size: medium;
+  font-family: var(--font-diff);
+  font-size: small;
 }
 .alert-container {
   display: flex;
@@ -74,11 +78,27 @@ h3 {
   align-items: center;
   padding: 20px;
   background-color: #ffebeb;
+  text-align: left;
   border-radius: 10px;
   color: #b1212b;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  font-size: medium;
+  font-family: var(--font-diff);
+  font-size: small;
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.history-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  border-radius: 10px;
+  font-family: var(--font-diff);
+  font-size: small;
 }
 
 input[type="url"] {
@@ -104,6 +124,8 @@ button {
   font: inherit;
   padding: 8px;
   transition: transform 0.2s;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 button:hover {
@@ -112,7 +134,7 @@ button:hover {
 
 p {
   color: var(--text-color);
-  font-family: "Jersey 10";
+  font-family: var(--font-main);
   font-size: 18px;
   margin: 8px 0;
 }
@@ -122,17 +144,10 @@ p {
   text-decoration: underline;
 }
 
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
 /* LegalLinkSelector.css */
 .no-links {
   font-size: 0.875rem;
-  color: #6b7280; /* text-gray-500 */
+  color: #6b7280;
   font-style: italic;
   margin-bottom: 1rem;
   display: flex;
@@ -142,6 +157,7 @@ p {
 }
 
 .link-selector {
+  width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -152,8 +168,12 @@ p {
 }
 
 .link-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  height: auto;
   gap: 0.5rem;
   font: var(--font-diff);
 }
@@ -162,23 +182,24 @@ p {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: 100%;
+  width: 80%;
   text-align: left;
   padding: 0.5rem;
-  border: 1px solid #e5e7eb; /* border-gray-200 */
+  border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
-  background-color: #ffffff; /* white */
+  background-color: #ffffff;
   transition: background-color 0.2s;
   cursor: pointer;
+  margin: 0;
 }
 
 .link-item:hover {
-  background-color: #f9fafb; /* hover:bg-gray-50 */
+  background-color: #f9fafb;
 }
 
 .link-item.selected {
-  background-color: #ebf5ff; /* bg-blue-50 */
-  border-color: #bfdbfe; /* border-blue-200 */
+  background-color: #ebf5ff;
+  border-color: #bfdbfe;
 }
 
 .top-level {
@@ -191,7 +212,7 @@ p {
 .link-icon {
   width: 1rem;
   height: 1rem;
-  color: #9ca3af; /* text-gray-400 */
+  color: #9ca3af;
   flex-shrink: 0;
 }
 
@@ -203,20 +224,88 @@ p {
 .link-text {
   font-size: 0.875rem;
   font-weight: 500;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .link-url {
+  width: 100%;
   font-size: 0.75rem;
-  color: #6b7280; /* text-gray-500 */
+  color: #6b7280;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .link-confidence {
   font-size: 0.75rem;
-  color: #9ca3af; /* text-gray-400 */
+  color: #9ca3af;
+}
+
+.time-confidence {
+  width: 35px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-size: 0.5rem;
+  color: #9ca3af;
+}
+
+.back-to-home {
+  text-decoration: underline;
+  size: 1.6rem;
+  font-size: small;
+  background-color: #ffebeb;
+  font-family: var(--font-diff);
+}
+
+#url-result {
+  font-size: small;
+  font-family: var(--font-diff);
+  color: #6b7280;
+}
+
+#clear-history {
+  position: relative;
+  bottom: 2;
+  right: 5;
+  font-size: medium;
+  font-family: var(--font-diff);
+  color: #6b7280;
+  cursor: pointer;
+  background-color: #ffffff;
+  margin-bottom: 10px;
+}
+
+#delete-button {
+  font-size: medium;
+  font-family: var(--font-diff);
+  color: #6b7280;
+  cursor: pointer;
+}
+
+#delete-button:hover {
+  color: #b1212b;
+}
+
+.link-unit {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.history-unit {
+  width: 80%;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.back-to-home-legacy {
+  font-family: var(--font-main);
+  text-decoration: underline;
+  size: 1.6rem;
+  font-size: small;
+  background-color: #ffebeb;
 }

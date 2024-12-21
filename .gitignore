@@ -30,5 +30,8 @@ yarn-error.log*
 # venv
 .venv/
 venv/
-.env
 __pycache__/
+
+# env allow .env.example
+!.env.example
+.env

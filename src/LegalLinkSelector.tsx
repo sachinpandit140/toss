@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "lucide-react";
-import { LoadingSpinner } from "./components/LoadingSpinner";
+import { LoadingSpinner } from "./Components/LoadingSpinner";
 import type { ScrapedLink } from "./types";
 import { getCurrentTabUrl } from "./utils/chrome";
 
@@ -25,7 +25,8 @@ const LegalLinkSelector: React.FC<LegalLinkSelectorProps> = ({
   const handletoplevel = () => {
     getCurrentTabUrl().then((url) => {
       let tld = new URL(url).hostname;
-      handleResult(tld);
+      let protocol = new URL(url).protocol;
+      handleResult(`${protocol}//${tld}`);
     });
   };
 
