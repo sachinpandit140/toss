@@ -99,7 +99,7 @@ export async function scrapeLegalLinks(): Promise<ScrapedLink[]> {
       }))
       .filter((link) => link.confidence > 0) // Only keep links with positive confidence
       .sort((a, b) => b.confidence - a.confidence); // Sort by confidence
-    return scrapedLegalLinks;
+    return scrapedLegalLinks.slice(0, 10);
   } catch (error) {
     console.error("Error scraping legal links:", error);
     return [];
