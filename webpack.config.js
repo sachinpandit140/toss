@@ -1,6 +1,8 @@
 const path = require("path");
 const HTMLPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const { DefinePlugin } = require("webpack");
+require("dotenv").config({ path: "./.env" });
 
 module.exports = {
   entry: {
@@ -36,6 +38,9 @@ module.exports = {
         { from: "public/images", to: "../images" },
         { from: "public/scripts", to: "./" },
       ],
+    }),
+    new DefinePlugin({
+      "process.env": JSON.stringify(process.env),
     }),
     ...getHtmlPlugins(["index"]),
   ],

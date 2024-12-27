@@ -68,7 +68,7 @@ const Result = ({
         const tld = new URL(url);
 
         const response = await fetch(
-          `http://localhost:8000/api/scan?query=${tld}`,
+          `${process.env.BACKEND_URL}/api/scan?query=${tld}`,
           {
             method: "GET",
             headers: {
